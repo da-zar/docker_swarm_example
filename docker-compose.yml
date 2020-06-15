@@ -19,17 +19,17 @@ services:
             constraints: [node.role == manager]
     example_1:
         build: ./shiny_app
-        image: shiny_app
+        image: dazarhub/shiny_app
         ports:
             - "3838:3838"
     example_2:
         build: ./plumber_app
-        image: plumber_app
+        image: dazarhub/plumber_app
         ports:
             - "8000:8000"
     example_3:
         build: ./flask_app
-        image: flask_app
+        image: dazarhub/flask_app
         ports:
             - "5000:5000"
         deploy:
