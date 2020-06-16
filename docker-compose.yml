@@ -20,22 +20,15 @@ services:
     example_1:
         build: ./shiny_app
         image: dazarhub/shiny_app
-        ports:
-            - "3838:3838"
+        deploy:
+            replicas: 2
     example_2:
         build: ./plumber_app
         image: dazarhub/plumber_app
-        ports:
-            - "8000:8000"
+        deploy:
+            replicas: 3
     example_3:
         build: ./flask_app
         image: dazarhub/flask_app
-        ports:
-            - "5000:5000"
         deploy:
-            replicas: 2
-            update_config:
-                parallelism: 2
-                delay: 10s
-            restart_policy:
-                condition: on-failure
+            replicas: 4
