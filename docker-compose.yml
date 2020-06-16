@@ -8,27 +8,36 @@ services:
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf:ro
         restart: always
+        deploy:
+            placement:
+                constraints: [node.role == manager]
     visualizer:
         image: dockersamples/visualizer:stable
         ports:
-          - "8080:8080"
+            - "8080:8080"
         volumes:
-          - "/var/run/docker.sock:/var/run/docker.sock"
+            - "/var/run/docker.sock:/var/run/docker.sock"
         deploy:
-          placement:
-            constraints: [node.role == manager]
+            placement:
+                constraints: [node.role == manager]
     example_1:
         build: ./shiny_app
         image: dazarhub/shiny_app
         deploy:
             replicas: 2
+            placement:
+                constraints: [node.role == worker]
     example_2:
         build: ./plumber_app
         image: dazarhub/plumber_app
         deploy:
             replicas: 3
+            placement:
+                constraints: [node.role == worker]
     example_3:
         build: ./flask_app
         image: dazarhub/flask_app
         deploy:
             replicas: 4
+            placement:
+                constraints: [node.role == worker]
